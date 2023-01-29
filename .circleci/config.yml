@@ -11,6 +11,12 @@ jobs:
       - checkout
       # Crea un entorno virtual
       - run:
+        name: install dependencies
+        command: |
+          python3 -m venv venv
+          - venv/bin/activate
+          pip install -r requirements.txt
+      - run:
         name: run test
         command: |
           . venv/bin/activate
