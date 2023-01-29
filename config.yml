@@ -1,0 +1,21 @@
+#Python CircleCI 2.0 configuration file
+version: 2
+jobs: 
+  build:
+    docker: 
+      - image: circleci/python:3.7
+    working_directory: ~/devops
+
+    steps:
+      # Obtener repo github
+      - checkout
+      # Crea un entorno virtual
+      - run:
+        name: run test
+        command: |
+          . venv/bin/activate
+          flake8 --exclude=venv* -- statistics
+          #pytest -v --cov=calculator
+          pytest --junitxml=test-result/junit.xml
+        store_test_reusult:
+          path: test-result
